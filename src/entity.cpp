@@ -8,12 +8,11 @@ Entity::Entity(SDL_Rect position, std::string bmloc, int speed){
 	this->bmloc = bmloc;
 
 	this->speed = speed;
-}
 
-void Entity::draw(SDL_Renderer *renderer){
-	SDL_RenderCopy(renderer, texture, NULL, &position);
-	//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-	//SDL_RenderFillRect(renderer, &this->position);
+	this->movement[UP] = false;
+	this->movement[DOWN] = false;
+	this->movement[LEFT] = false;
+	this->movement[RIGHT] = false;
 }
 
 void Entity::create(SDL_Renderer *renderer){
@@ -26,31 +25,47 @@ void Entity::destroy(){
 	SDL_FreeSurface(surface);
 }
 
-void Entity::move(DIRECTION dir){
+
+void Entity::update(SDL_Renderer *renderer){
+	move();
+	draw(renderer);
+}
+
+void Entity::draw(SDL_Renderer *renderer){
+	SDL_RenderCopy(renderer, texture, NULL, &position);
+	//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	//SDL_RenderFillRect(renderer, &this->position);
+}
+
+void Entity::setMovement(DIRECTION dir, bool val){
+	this->movement[dir] = val;
+	
 	switch(dir){
-		case UP:
-			this->position.y -= speed;
-			if(this->position.y < 0)
-				this->position.y = 0;
-			break;
+		case UP:	movement[DOWN] = false;  break;
+		case DOWN:	movement[UP] = false; 	 break;
+		case LEFT:	movement[RIGHT] = false; break;
+		case RIGHT: movement[LEFT] = false;  break;
+	}
+}
 
-		case DOWN:
-			if(! (this->position.y >= SCREEN_HEIGHT - this->position.h))
-				this->position.y += speed;
-			break;
+void Entity::move(){
+	if(this->movement[UP]){
+		this->position.y -= speed;
+		if(this->position.y <= 0)
+			this->position.y = 0;
+	}
+	else if(this->movement[DOWN]){
+		if(! (this->position.y >= SCREEN_HEIGHT - this->position.h))
+			this->position.y += speed;
+	}
 
-		case LEFT:
-			this->position.x -= speed;
-			if(this->position.x < 0)
-				this->position.x = 0;
-			break;
-
-		case RIGHT:
-			if(! (this->position.x >= SCREEN_WIDTH - this->position.w))
-				this->position.x += speed;
-			break;
-
-		default:
-			break;
+	if(this->movement[LEFT]){
+		this->position.x -= speed;
+		if(this->position.x < 0)
+			this->position.x = 0;
+	}
+	else if(this->movement[RIGHT]){
+		if(! (this->position.x >= SCREEN_WIDTH - this->position.w))
+			this->position.x += speed;
 	}
 }

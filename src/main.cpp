@@ -39,8 +39,9 @@ int main(int argc, char *argv[]){
 		app.drawBackground();
 
 		ev.handle();
-		player1.draw(app.getRenderer());
-		player2.draw(app.getRenderer());
+
+		player1.update(app.getRenderer());
+		player2.update(app.getRenderer());
 
 		SDL_RenderPresent(app.getRenderer());
 		SDL_Delay(20);

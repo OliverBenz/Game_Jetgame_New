@@ -1,7 +1,7 @@
 #include "evHandler.hpp"
 #include "app.hpp"
 
-void keyboardHandle(SDL_Scancode sc);
+void keyboardHandle(SDL_Scancode sc, bool val);
 
 void EventHandler::handle(){
 	while(SDL_PollEvent(&event)){
@@ -9,53 +9,60 @@ void EventHandler::handle(){
 			case SDL_QUIT:
 				endProgram = true;
 				break;
+
 			case SDL_KEYDOWN:
-				keyboardHandle(event.key.keysym.scancode);
+				keyboardHandle(event.key.keysym.scancode, true);
 				break;
+
+			case SDL_KEYUP:
+				keyboardHandle(event.key.keysym.scancode, false);
+				break;
+
 			default:
 				break;
 		}
 	}
 }
 
-void keyboardHandle(SDL_Scancode sc){
+void keyboardHandle(SDL_Scancode sc, bool val){
 	switch(sc){
 		case SDL_SCANCODE_ESCAPE:
 			endProgram = true;
 			break;
 		case SDL_SCANCODE_W:
-			player1.move(UP);	
+			player1.setMovement(UP, val);
 			break;
 
 		case SDL_SCANCODE_S:
-			player1.move(DOWN);
+			player1.setMovement(DOWN, val);
 			break;
 
 		case SDL_SCANCODE_A:
-			player1.move(LEFT);
+			player1.setMovement(LEFT, val);
 			break;
 
 		case SDL_SCANCODE_D:
-			player1.move(RIGHT);
+			player1.setMovement(RIGHT, val);
 			break;
 		
 		case SDL_SCANCODE_UP:
-			player2.move(UP);
+			player2.setMovement(UP, val);
 			break;
 
 		case SDL_SCANCODE_DOWN: 
-			player2.move(DOWN);
+			player2.setMovement(DOWN, val);
 			break;
 
 		case SDL_SCANCODE_LEFT:
-			player2.move(LEFT);
+			player2.setMovement(LEFT, val);
 			break;
 
 		case SDL_SCANCODE_RIGHT:
-			player2.move(RIGHT);
+			player2.setMovement(RIGHT, val);
 			break;
 
 		default:
 			break;
 	}
 }
+

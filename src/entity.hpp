@@ -2,11 +2,14 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <map>
 
 enum DIRECTION { UP, DOWN, LEFT, RIGHT };
 
 class Entity{
 	int x, y, width, height, speed;
+	
+	std::map<DIRECTION, bool> movement;
 
 	// Bitmap Path 
 	std::string bmloc;	
@@ -21,6 +24,8 @@ public:
 	void create(SDL_Renderer *renderer);
 	void destroy();
 
+	void update(SDL_Renderer *renderer);
 	void draw(SDL_Renderer *renderer);
-	void move(DIRECTION dir);
+	void setMovement(DIRECTION dir, bool val);
+	void move();
 };
