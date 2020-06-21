@@ -20,7 +20,7 @@ public:
 	// Initialize SDL
 	App();
 
-	int init();
+	bool init();
 	void destroy();
 
 	void drawBackground();
