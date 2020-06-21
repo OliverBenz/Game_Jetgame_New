@@ -5,82 +5,46 @@
 #include "definitions.hpp"
 #include "app.hpp"
 #include "player.hpp"
+#include "evHandler.hpp"
 
 void eventHandler(SDL_Event *event);
 void keyboardHandler(SDL_Scancode sc);
 
-// FIXME: Global player, Acces eventHandler
-Player p(0, 0, 64, 64);
+SDL_Rect r = { .x = 0, .y = 0, .w = PLAYER_WIDTH , .h = PLAYER_HEIGHT };
+Player player1(r);
+
 bool endProgram = false;
 
 int main(int argc, char *argv[]){
 	App app;
 	if(! app.init()) 
 		return EXIT_FAILURE;
-
+	
 	SDL_Event event;
 
 	// Background Bitmap
 	SDL_Surface *background = SDL_LoadBMP("../res/Background/background.bmp");
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(app.getRenderer(), background);
 
+	player1.create(app.getRenderer());
+	EventHandler ev;
 	while(!endProgram){
 		SDL_RenderCopy(app.getRenderer(), texture, NULL, NULL);
-		//SDL_SetRenderDrawColor(app.getRenderer(), 0, 0, 0, 0);
-		//SDL_RenderClear(app.getRenderer());
 
-		eventHandler(&event);
+		ev.handle();
 
-		p.draw(app.getRenderer());
+		player1.draw(app.getRenderer());
 
 		SDL_RenderPresent(app.getRenderer());
 
-		//SDL_Delay(200);
+		SDL_Delay(20);
 	}
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(background);
+	player1.destroy();
 	app.destroy();
 
 	return 0;
 }
 
-void eventHandler(SDL_Event *event){
-	while(SDL_PollEvent(event)){
-		switch(event->type){
-			case SDL_QUIT:
-				endProgram = true;
-				break;
-			case SDL_KEYDOWN:
-				keyboardHandler(event->key.keysym.scancode);
-				break;
-			default:
-				break;
-		}
-	}
-}
 
-void keyboardHandler(SDL_Scancode sc){
-	switch(sc){
-		case SDL_SCANCODE_ESCAPE:
-			endProgram = true;
-			break;
-		case SDL_SCANCODE_W:
-			p.move(UP);	
-			break;
-
-		case SDL_SCANCODE_S:
-			p.move(DOWN);
-			break;
-
-		case SDL_SCANCODE_A:
-			p.move(LEFT);
-			break;
-
-		case SDL_SCANCODE_D:
-			p.move(RIGHT);
-			break;
-			
-		default:
-			break;
-	}
-}

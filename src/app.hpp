@@ -1,9 +1,13 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include "player.hpp"
+
+extern Player player1;
+extern bool endProgram;
 
 class App{
-	int renderFlag, windowFlag;
+	int renderFlag, windowFlag;	
 
 	SDL_Renderer *renderer;
 	SDL_Window *window;
