@@ -1,3 +1,4 @@
+#include <error.h>
 #include "app.hpp"
 #include "definitions.hpp"
 
@@ -28,12 +29,26 @@ int App::init(){
 		fprintf(stderr, "Could not create renderer: %s\n", SDL_GetError());
 		return -1;
 	}
+
+	// Create Background
+	this->background = SDL_LoadBMP(BM_BACKGROUND);
+	this->texture = SDL_CreateTextureFromSurface(this->renderer, background);
+	
 	return 1;
 }
 
+void App::drawBackground(){
+	SDL_RenderCopy(this->renderer, texture, NULL, NULL);
+}
+
 void App::destroy(){
+	// Destroy Background
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(background);
+
 	SDL_DestroyRenderer(this->renderer);
 	SDL_DestroyWindow(this->window);
+
 	SDL_Quit();
 }
 

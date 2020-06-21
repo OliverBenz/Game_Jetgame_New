@@ -6,3 +6,5 @@
 
 #define PLAYER_WIDTH 160
 #define PLAYER_HEIGHT 90
+
+#define BM_BACKGROUND "../res/Background/background.bmp"
