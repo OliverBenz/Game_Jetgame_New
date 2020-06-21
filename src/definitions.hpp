@@ -3,3 +3,6 @@
 
 #define PLAYER_HEALTH 20
 #define BULLET_DAMAGE 5
+
+#define PLAYER_WIDTH 160
+#define PLAYER_HEIGHT 90
