@@ -1,0 +1,5 @@
+#define SCREEN_HEIGHT 720
+#define SCREEN_WIDTH 1020
+
+#define PLAYER_HEALTH 20
+#define BULLET_DAMAGE 5
