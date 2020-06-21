@@ -6,13 +6,13 @@
 #include "evHandler.hpp"
 
 SDL_Rect r = { .x = 0, .y = 0, .w = PLAYER_WIDTH , .h = PLAYER_HEIGHT };
-Player player1(r, "../res/player/player_left.bmp");
+Player player1(r, BM_PLAYER1);
 
 bool endProgram = false;
 
 int main(int argc, char *argv[]){
 	App app;
-	if(! app.init()) 
+	if(! app.init())
 		return EXIT_FAILURE;
 
 	// Create player and Event Handler	
@@ -36,5 +36,3 @@ int main(int argc, char *argv[]){
 
 	return 0;
 }
-
-

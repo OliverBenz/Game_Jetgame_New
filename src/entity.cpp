@@ -1,12 +1,14 @@
 #include "entity.hpp"
 #include "definitions.hpp"
 
-Entity::Entity(SDL_Rect position, std::string bmloc){
+Entity::Entity(SDL_Rect position, std::string bmloc, int speed){
 	this->position = position;
 	this->surface = nullptr;
 	this->texture = nullptr;
 	this->bmloc = bmloc;
-};
+
+	this->speed = speed;
+}
 
 void Entity::draw(SDL_Renderer *renderer){
 	SDL_RenderCopy(renderer, texture, NULL, &position);

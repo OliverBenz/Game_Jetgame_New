@@ -6,8 +6,7 @@
 enum DIRECTION { UP, DOWN, LEFT, RIGHT };
 
 class Entity{
-	int x, y, width, height;
-	const int speed = 8;
+	int x, y, width, height, speed;
 
 	// Bitmap Path 
 	std::string bmloc;	
@@ -17,7 +16,7 @@ class Entity{
 	SDL_Texture *texture;
 
 public:
-	Entity(SDL_Rect position, std::string bmloc);
+	Entity(SDL_Rect position, std::string bmloc, const int speed);
 
 	void create(SDL_Renderer *renderer);
 	void destroy();
