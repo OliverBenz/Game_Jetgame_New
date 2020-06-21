@@ -10,3 +10,4 @@
 
 #define BM_BACKGROUND "../res/Background/background.bmp"
 #define BM_PLAYER1    "../res/player/player_left.bmp"
+#define BM_PLAYER2    "../res/player/player_right.bmp"

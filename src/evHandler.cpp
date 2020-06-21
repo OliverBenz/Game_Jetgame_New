@@ -38,7 +38,23 @@ void keyboardHandle(SDL_Scancode sc){
 		case SDL_SCANCODE_D:
 			player1.move(RIGHT);
 			break;
-			
+		
+		case SDL_SCANCODE_UP:
+			player2.move(UP);
+			break;
+
+		case SDL_SCANCODE_DOWN: 
+			player2.move(DOWN);
+			break;
+
+		case SDL_SCANCODE_LEFT:
+			player2.move(LEFT);
+			break;
+
+		case SDL_SCANCODE_RIGHT:
+			player2.move(RIGHT);
+			break;
+
 		default:
 			break;
 	}

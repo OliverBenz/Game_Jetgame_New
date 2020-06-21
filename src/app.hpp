@@ -4,6 +4,7 @@
 #include "player.hpp"
 
 extern Player player1;
+extern Player player2;
 extern bool endProgram;
 
 class App{

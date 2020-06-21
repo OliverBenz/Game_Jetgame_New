@@ -19,4 +19,4 @@ evHandler.o: evHandler.cpp evHandler.hpp
 	${CC} -c evHandler.cpp ${SDLFLAGS}
 
 make clean:
-	rm main *.o
+	rm *.o

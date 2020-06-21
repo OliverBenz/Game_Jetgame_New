@@ -5,8 +5,22 @@
 #include "player.hpp"
 #include "evHandler.hpp"
 
-SDL_Rect r = { .x = 0, .y = 0, .w = PLAYER_WIDTH , .h = PLAYER_HEIGHT };
-Player player1(r, BM_PLAYER1);
+SDL_Rect l = {
+	.x = 0,
+	.y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2,
+	.w = PLAYER_WIDTH,
+	.h = PLAYER_HEIGHT
+};
+SDL_Rect r = {
+	.x = SCREEN_WIDTH - PLAYER_WIDTH,
+	.y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2,
+	.w = PLAYER_WIDTH,
+	.h = PLAYER_HEIGHT
+};
+
+
+Player player1(l, BM_PLAYER1);
+Player player2(r, BM_PLAYER2);
 
 bool endProgram = false;
 
@@ -17,6 +31,7 @@ int main(int argc, char *argv[]){
 
 	// Create player and Event Handler	
 	player1.create(app.getRenderer());
+	player2.create(app.getRenderer());
 	EventHandler ev;
 
 	// Game Loop
@@ -25,6 +40,7 @@ int main(int argc, char *argv[]){
 
 		ev.handle();
 		player1.draw(app.getRenderer());
+		player2.draw(app.getRenderer());
 
 		SDL_RenderPresent(app.getRenderer());
 		SDL_Delay(20);
