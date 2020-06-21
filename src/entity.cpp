@@ -1,8 +1,11 @@
 #include "entity.hpp"
 #include "definitions.hpp"
 
-Entity::Entity(SDL_Rect position){
+Entity::Entity(SDL_Rect position, std::string bmloc){
 	this->position = position;
+	this->surface = nullptr;
+	this->texture = nullptr;
+	this->bmloc = bmloc;
 };
 
 void Entity::draw(SDL_Renderer *renderer){
@@ -12,7 +15,7 @@ void Entity::draw(SDL_Renderer *renderer){
 }
 
 void Entity::create(SDL_Renderer *renderer){
-	this->surface = SDL_LoadBMP("../res/player/player_left.bmp");
+	this->surface = SDL_LoadBMP(this->bmloc.c_str());
 	this->texture = SDL_CreateTextureFromSurface(renderer, surface);
 }
 

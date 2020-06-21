@@ -5,5 +5,5 @@
 class Player : public Entity{
 public:
 	int health;
-	Player(SDL_Rect position);
+	Player(SDL_Rect position, std::string bmloc);
 };
