@@ -8,11 +8,15 @@ class Entity{
 	int x, y, width, height;
 	const int speed = 8;
 	
-	SDL_Rect sprite;
-	// Bitmap
+	SDL_Rect position;
+	SDL_Surface *surface;
+	SDL_Texture *texture;
 
 public:
-	Entity(int x, int y, int width, int height);
+	Entity(SDL_Rect position);
+
+	void create(SDL_Renderer *renderer);
+	void destroy();
 
 	void draw(SDL_Renderer *renderer);
 	void move(DIRECTION dir);

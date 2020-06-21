@@ -1,6 +1,6 @@
 #include "player.hpp"
 #include "definitions.hpp"
 
-Player::Player(int x, int y, int width, int height) : Entity(x, y, width, height){
+Player::Player(SDL_Rect position) : Entity(position){
 	this->health = PLAYER_HEALTH;
 }

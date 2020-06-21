@@ -1,6 +1,6 @@
 #include "bullet.hpp"
 #include "definitions.hpp"
 
-Bullet::Bullet(int x, int y, int width, int height) : Entity(x, y, width, height){
+Bullet::Bullet(SDL_Rect position) : Entity(position){
 	this->damage = BULLET_DAMAGE;
 }

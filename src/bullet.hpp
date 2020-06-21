@@ -6,5 +6,5 @@ class Bullet{
 	int damage;
 
 public:
-	Bullet(int x, int y, int width, int height);
+	Bullet(SDL_Rect position);
 };
