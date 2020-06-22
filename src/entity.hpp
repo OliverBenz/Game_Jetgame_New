@@ -7,7 +7,7 @@
 enum DIRECTION { UP, DOWN, LEFT, RIGHT };
 
 class Entity{
-	int x, y, width, height, speed;
+	int speed;
 	
 	std::map<DIRECTION, bool> movement;
 

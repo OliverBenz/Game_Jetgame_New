@@ -5,6 +5,7 @@
 #include "player.hpp"
 #include "evHandler.hpp"
 
+// Startposition of Player r(right), l(left)
 SDL_Rect l = {
 	.x = 0,
 	.y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2,
@@ -17,7 +18,6 @@ SDL_Rect r = {
 	.w = PLAYER_WIDTH,
 	.h = PLAYER_HEIGHT
 };
-
 
 Player player1(l, BM_PLAYER1);
 Player player2(r, BM_PLAYER2);
@@ -49,6 +49,7 @@ int main(int argc, char *argv[]){
 
 	// Destroy Elements
 	player1.destroy();
+	player2.destroy();
 	app.destroy();
 
 	return 0;
