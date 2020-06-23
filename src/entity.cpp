@@ -50,19 +50,22 @@ void Entity::setMovement(DIRECTION dir, bool val){
 
 void Entity::move(){
 	if(this->movement[UP]){
-		this->position.y -= speed;
-		if(this->position.y <= 0)
-			this->position.y = 0;
+		if (! this->movement[DOWN]){
+			this->position.y -= speed;
+			if(this->position.y <= 0)
+				this->position.y = 0;
+		}
 	}
 	else if(this->movement[DOWN]){
 		if(! (this->position.y >= SCREEN_HEIGHT - this->position.h))
-			this->position.y += speed;
-	}
-
+			this->position.y += speed; }
+		
 	if(this->movement[LEFT]){
-		this->position.x -= speed;
-		if(this->position.x < 0)
-			this->position.x = 0;
+		if(! this->movement[RIGHT]){
+			this->position.x -= speed;
+			if(this->position.x < 0)
+				this->position.x = 0;
+		}
 	}
 	else if(this->movement[RIGHT]){
 		if(! (this->position.x >= SCREEN_WIDTH - this->position.w))
