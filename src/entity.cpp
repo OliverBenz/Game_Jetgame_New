@@ -40,12 +40,12 @@ void Entity::draw(SDL_Renderer *renderer){
 void Entity::setMovement(DIRECTION dir, bool val){
 	this->movement[dir] = val;
 	
-	switch(dir){
-		case UP:	movement[DOWN] = false;  break;
-		case DOWN:	movement[UP] = false; 	 break;
-		case LEFT:	movement[RIGHT] = false; break;
-		case RIGHT: movement[LEFT] = false;  break;
-	}
+//	switch(dir){
+//		case UP:	movement[DOWN] = false;  break;
+//		case DOWN:	movement[UP] = false; 	 break;
+//		case LEFT:	movement[RIGHT] = false; break;
+//		case RIGHT: movement[LEFT] = false;  break;
+//	}
 }
 
 void Entity::move(){
