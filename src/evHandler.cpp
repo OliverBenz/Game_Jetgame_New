@@ -29,6 +29,8 @@ void keyboardHandle(SDL_Scancode sc, bool val){
 		case SDL_SCANCODE_ESCAPE:
 			endProgram = true;
 			break;
+
+		// Player 1 Controls
 		case SDL_SCANCODE_W:
 			player1.setMovement(UP, val);
 			break;
@@ -45,6 +47,11 @@ void keyboardHandle(SDL_Scancode sc, bool val){
 			player1.setMovement(RIGHT, val);
 			break;
 		
+		case SDL_SCANCODE_SPACE:
+			//player1.shoot(RIGHT);
+			break;
+	
+		//Player 2 Controls	
 		case SDL_SCANCODE_UP:
 			player2.setMovement(UP, val);
 			break;
@@ -59,6 +66,10 @@ void keyboardHandle(SDL_Scancode sc, bool val){
 
 		case SDL_SCANCODE_RIGHT:
 			player2.setMovement(RIGHT, val);
+			break;
+
+		case SDL_SCANCODE_KP_0:
+			//player2.shoot(LEFT);
 			break;
 
 		default:

@@ -1,8 +1,8 @@
 #pragma once
 
-#include <entity.hpp>
+#include "entity.hpp"
 
-class Bullet{
+class Bullet : public Entity{
 	int damage;
 
 public:

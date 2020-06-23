@@ -1,10 +1,14 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <vector>
 #include "player.hpp"
+#include "bullet.hpp"
 
 extern Player player1;
 extern Player player2;
+extern std::vector<Bullet> bullets1;
+extern std::vector<Bullet> bullets2;
 extern bool endProgram;
 
 class App{
