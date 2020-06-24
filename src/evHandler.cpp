@@ -1,7 +1,7 @@
 #include "evHandler.hpp"
 #include "app.hpp"
 
-void keyboardHandle(SDL_Scancode sc, bool val);
+void keyboardHandle(SDL_Scancode *sc, bool val);
 
 void EventHandler::handle(){
 	while(SDL_PollEvent(&event)){
@@ -11,11 +11,11 @@ void EventHandler::handle(){
 				break;
 
 			case SDL_KEYDOWN:
-				keyboardHandle(event.key.keysym.scancode, true);
+				keyboardHandle(&(event.key.keysym.scancode), true);
 				break;
 
 			case SDL_KEYUP:
-				keyboardHandle(event.key.keysym.scancode, false);
+				keyboardHandle(&(event.key.keysym.scancode), false);
 				break;
 
 			default:
@@ -24,8 +24,8 @@ void EventHandler::handle(){
 	}
 }
 
-void keyboardHandle(SDL_Scancode sc, bool val){
-	switch(sc){
+void keyboardHandle(SDL_Scancode *sc, bool val){
+	switch(*sc){
 		case SDL_SCANCODE_ESCAPE:
 			endProgram = true;
 			break;

@@ -19,8 +19,8 @@ SDL_Rect r = {
 	.h = PLAYER_HEIGHT
 };
 
-Player player1(l, BM_PLAYER1);
-Player player2(r, BM_PLAYER2);
+Player player1(&l, BM_PLAYER1);
+Player player2(&r, BM_PLAYER2);
 
 bool endProgram = false;
 

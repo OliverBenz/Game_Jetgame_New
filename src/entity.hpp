@@ -14,12 +14,12 @@ class Entity{
 	// Bitmap Path 
 	std::string bmloc;	
 
-	SDL_Rect position;
+	SDL_Rect *position;
 	SDL_Surface *surface;
 	SDL_Texture *texture;
 
 public:
-	Entity(SDL_Rect position, std::string bmloc, const int speed);
+	Entity(SDL_Rect *position, std::string bmloc, const int speed);
 
 	void create(SDL_Renderer *renderer);
 	void destroy();
