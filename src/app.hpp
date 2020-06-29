@@ -7,8 +7,6 @@
 
 extern Player player1;
 extern Player player2;
-extern std::vector<Bullet> bullets1;
-extern std::vector<Bullet> bullets2;
 extern bool endProgram;
 
 class App{
