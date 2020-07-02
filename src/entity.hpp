@@ -24,8 +24,8 @@ public:
 	Entity(SDL_Rect *position, std::string bmloc, const int speed);
 
 	void create(SDL_Renderer *renderer);
-	void destroy();
-
+	virtual void destroy();
+	
 	virtual void update(SDL_Renderer *renderer);
 	void draw(SDL_Renderer *renderer);
 	void setMovement(DIRECTION dir, bool val);

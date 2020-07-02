@@ -2,7 +2,7 @@
 
 #include "definitions.hpp"
 #include "app.hpp"
-#include "player.hpp"
+#include "globals.hpp"
 #include "evHandler.hpp"
 
 // Startposition of Player r(right), l(left)
@@ -23,6 +23,7 @@ Player player1(&l, BM_PLAYER1);
 Player player2(&r, BM_PLAYER2);
 
 bool endProgram = false;
+SDL_Renderer* renderer;
 
 int main(int argc, char *argv[]){
 	App app;
@@ -30,8 +31,8 @@ int main(int argc, char *argv[]){
 		return EXIT_FAILURE;
 
 	// Create player and Event Handler	
-	player1.create(app.getRenderer());
-	player2.create(app.getRenderer());
+	player1.create(renderer);
+	player2.create(renderer);
 	EventHandler ev;
 
 	// Game Loop
@@ -40,10 +41,14 @@ int main(int argc, char *argv[]){
 
 		ev.handle();
 
-		player1.update(app.getRenderer());
-		player2.update(app.getRenderer());
+		printf("%s\n", SDL_GetError());
 
-		SDL_RenderPresent(app.getRenderer());
+		player1.update();
+		player1.checkCollision(player2.getBullets());
+		player2.update();
+		player2.checkCollision(player1.getBullets());
+
+		SDL_RenderPresent(renderer);
 		SDL_Delay(20);
 	}
 

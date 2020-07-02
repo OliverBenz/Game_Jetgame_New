@@ -11,7 +11,11 @@ public:
 
 	Player(SDL_Rect *position, std::string bmloc);
 
-	//void update(SDL_Renderer *renderer);
-	//void destroy();
-	//void shoot(DIRECTION dir);
+	void update();
+	void checkCollision(std::vector<Bullet>* bullets);
+
+	std::vector<Bullet>* getBullets();
+
+	void destroy();
+	void shoot(DIRECTION dir);
 };

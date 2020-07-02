@@ -1,7 +1,7 @@
 #include "evHandler.hpp"
-#include "app.hpp"
+#include "globals.hpp"
 
-void keyboardHandle(SDL_Scancode *sc, bool val);
+void keyboardHandle(const SDL_Scancode *sc, const bool val);
 
 void EventHandler::handle(){
 	while(SDL_PollEvent(&event)){
@@ -15,7 +15,7 @@ void EventHandler::handle(){
 	}
 }
 
-void keyboardHandle(SDL_Scancode *sc, bool val){
+void keyboardHandle(const SDL_Scancode *sc, const bool val){
 	switch(*sc){
 		case SDL_SCANCODE_ESCAPE:
 			endProgram = true;
@@ -26,7 +26,7 @@ void keyboardHandle(SDL_Scancode *sc, bool val){
 		case SDL_SCANCODE_S:	player1.setMovement(DOWN, val);	break;
 		case SDL_SCANCODE_A:	player1.setMovement(LEFT, val);	break;
 		case SDL_SCANCODE_D:	player1.setMovement(RIGHT, val);break;
-//		case SDL_SCANCODE_SPACE:player1.shoot(RIGHT);			break;
+		case SDL_SCANCODE_SPACE:player1.shoot(RIGHT);			break;
 	
 		//Player 2 Controls	
 		case SDL_SCANCODE_UP:	player2.setMovement(UP, val);	break;
