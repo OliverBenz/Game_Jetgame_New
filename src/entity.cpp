@@ -34,9 +34,7 @@ void Entity::update(){
 
 void Entity::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, position);
-	printf("%5d%5d%5d%5d\n", position->x, position->y, position->w, position->h);
-	//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-	//SDL_RenderFillRect(renderer, &this->position);
+	//printf("%5d%5d%5d%5d\n", position->x, position->y, position->w, position->h);
 }
 
 void Entity::setMovement(DIRECTION dir, bool val){

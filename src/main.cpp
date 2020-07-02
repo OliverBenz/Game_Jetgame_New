@@ -43,6 +43,7 @@ int main(int argc, char *argv[]){
 
 		printf("%s\n", SDL_GetError());
 
+		// Update player and check for bullet collision
 		player1.update();
 		player1.checkCollision(player2.getBullets());
 		player2.update();
