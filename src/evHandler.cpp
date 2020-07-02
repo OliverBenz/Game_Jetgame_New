@@ -33,7 +33,7 @@ void keyboardHandle(const SDL_Scancode *sc, const bool val){
 		case SDL_SCANCODE_DOWN:	player2.setMovement(DOWN, val);	break;
 		case SDL_SCANCODE_LEFT:	player2.setMovement(LEFT, val);	break;
 		case SDL_SCANCODE_RIGHT:player2.setMovement(RIGHT, val);break;
-//		case SDL_SCANCODE_KP_0:	player2.shoot(LEFT);			break;
+		case SDL_SCANCODE_KP_0:	player2.shoot(LEFT);			break;
 
 		default:
 			break;

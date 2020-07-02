@@ -8,25 +8,37 @@ Player::Player(SDL_Rect *position, std::string bmloc) : Entity(position, bmloc, 
 
 void Player::shoot(DIRECTION dir){
 	if(dir == LEFT || dir == RIGHT){
-		SDL_Rect bPos = {
-			.x = Entity::position->x + Entity::position->w,
-			.y = Entity::position->y + (Entity::position->h / 2),
+		SDL_Rect *bPos = new SDL_Rect{
+			.x = (this->position->x + this->position->w),
+			.y = (this->position->y + (this->position->h / 2)),
 			.w = BULLET_SIZE,
 			.h = BULLET_SIZE
 		};
 
-		Bullet b(&bPos);
-		b.create(renderer);
+		Bullet b(bPos);
+		b.create();
+		b.setMovement(dir, true);
 		this->bullets.push_back(b);
 	}
 }
 
 void Player::update(){
 	this->move();
-	this->draw(renderer);
+	this->draw();
 
-	for(Bullet b: this->bullets){
-		b.update(renderer);
+	if(this->bullets.size() != 0){
+		int limit = this->bullets.front().getMovement(RIGHT) ? SCREEN_WIDTH-BULLET_SIZE : 0;
+		bool mvRight = this->bullets.front().getMovement(RIGHT);
+
+		for(auto it = std::begin(this->bullets); it != std::end(this->bullets); ++it){
+			if(mvRight && it->position->x >= limit || !mvRight && it->position->x <= limit){
+				delete it->position;
+				this->bullets.erase(it);
+				--it;
+				continue;
+			}
+			it->update();
+		}
 	}
 }
 
@@ -42,7 +54,9 @@ std::vector<Bullet>* Player::getBullets(){
 }
 
 void Player::destroy(){
-	for(Bullet b: this->bullets)
+	for(Bullet b: this->bullets){
+		delete b.position;
 		b.destroy();
+	}
 	Entity::destroy();
 }
