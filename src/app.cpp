@@ -24,21 +24,21 @@ bool App::init(){
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 
-	this->renderer = SDL_CreateRenderer(this->window, -1, renderFlag);
-	if(! this->renderer){
+	renderer = SDL_CreateRenderer(this->window, -1, renderFlag);
+	if(! renderer){
 		fprintf(stderr, "Could not create renderer: %s\n", SDL_GetError());
 		return false;
 	}
 
 	// Create Background
 	this->background = SDL_LoadBMP(BM_BACKGROUND);
-	this->texture = SDL_CreateTextureFromSurface(this->renderer, background);
+	this->texture = SDL_CreateTextureFromSurface(renderer, background);
 	
 	return true;
 }
 
 void App::drawBackground(){
-	SDL_RenderCopy(this->renderer, texture, NULL, NULL);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
 }
 
 void App::destroy(){
@@ -46,14 +46,14 @@ void App::destroy(){
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(background);
 
-	SDL_DestroyRenderer(this->renderer);
+	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(this->window);
 
 	SDL_Quit();
 }
 
 SDL_Renderer* App::getRenderer(){
-	return this->renderer;
+	return renderer;
 }
 
 SDL_Window* App::getWindow(){

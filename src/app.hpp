@@ -1,13 +1,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <vector>
-#include "player.hpp"
-#include "bullet.hpp"
-
-extern Player player1;
-extern Player player2;
-extern bool endProgram;
+#include "globals.hpp"
 
 class App{
 	int renderFlag, windowFlag;	
@@ -16,7 +10,6 @@ class App{
 	SDL_Surface *background; 
 	SDL_Texture *texture;
 	
-	SDL_Renderer *renderer;
 	SDL_Window *window;
 
 public:
