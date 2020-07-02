@@ -8,9 +8,9 @@
 
 #define BULLET_DAMAGE 5
 #define BULLET_SPEED 10
-#define BULLET_SIZE 10
+#define BULLET_SIZE 50
 
 #define BM_BACKGROUND "../res/Background/background.bmp"
 #define BM_PLAYER1    "../res/player/player_left.bmp"
 #define BM_PLAYER2    "../res/player/player_right.bmp"
-#define BM_BULLET	  "../res/player/bullet.bmp"
+#define BM_BULLET	  "../res/player/bullet1.bmp"
