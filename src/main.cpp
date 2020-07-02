@@ -31,8 +31,8 @@ int main(int argc, char *argv[]){
 		return EXIT_FAILURE;
 
 	// Create player and Event Handler	
-	player1.create(renderer);
-	player2.create(renderer);
+	player1.create();
+	player2.create();
 	EventHandler ev;
 
 	// Game Loop

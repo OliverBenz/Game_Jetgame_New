@@ -1,5 +1,6 @@
 #include "entity.hpp"
 #include "definitions.hpp"
+#include "globals.hpp"
 
 Entity::Entity(SDL_Rect *position, std::string bmloc, int speed){
 	this->position = position;
@@ -15,7 +16,7 @@ Entity::Entity(SDL_Rect *position, std::string bmloc, int speed){
 	this->movement[RIGHT] = false;
 }
 
-void Entity::create(SDL_Renderer *renderer){
+void Entity::create(){
 	this->surface = SDL_LoadBMP(this->bmloc.c_str());
 	this->texture = SDL_CreateTextureFromSurface(renderer, surface);
 }
@@ -26,19 +27,24 @@ void Entity::destroy(){
 }
 
 
-void Entity::update(SDL_Renderer *renderer){
+void Entity::update(){
 	move();
-	draw(renderer);
+	draw();
 }
 
-void Entity::draw(SDL_Renderer *renderer){
+void Entity::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, position);
+	printf("%5d%5d%5d%5d\n", position->x, position->y, position->w, position->h);
 	//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	//SDL_RenderFillRect(renderer, &this->position);
 }
 
 void Entity::setMovement(DIRECTION dir, bool val){
 	this->movement[dir] = val;
+}
+
+bool Entity::getMovement(DIRECTION dir){
+	return this->movement[dir];
 }
 
 void Entity::move(){
