@@ -5,17 +5,17 @@
 #include "bullet.hpp"
 
 class Player : public Entity{
-public:
 	int health;
 	std::vector<Bullet> bullets;
 
+public:
 	Player(SDL_Rect *position, std::string bmloc);
 
 	void update();
+	void destroy();
+
 	void checkCollision(std::vector<Bullet>* bullets);
 
 	std::vector<Bullet>* getBullets();
-
-	void destroy();
 	void shoot(DIRECTION dir);
 };
