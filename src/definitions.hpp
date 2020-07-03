@@ -15,8 +15,8 @@
 
 // Bitmaps
 #define BM_BACKGROUND "../res/background/background.bmp"
-#define BM_LEFTWIN	  "../res/background/win-left.bmp"
-#define BM_RIGHTWIN   "../res/background/win-right.bmp"
+#define BM_LEFTWIN	  "../res/background/win_left.bmp"
+#define BM_RIGHTWIN   "../res/background/win_right.bmp"
 
 #define BM_PLAYER1    "../res/player/player_left.bmp"
 #define BM_PLAYER2    "../res/player/player_right.bmp"
