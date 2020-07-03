@@ -23,6 +23,9 @@ Player player1(&l, LEFT, BM_PLAYER1);
 Player player2(&r, RIGHT, BM_PLAYER2);
 
 bool endProgram = false;
+bool gameOver = false;
+DIRECTION winner = LEFT;
+
 SDL_Renderer* renderer;
 
 int main(int argc, char *argv[]){
@@ -37,18 +40,26 @@ int main(int argc, char *argv[]){
 
 	// Game Loop
 	while(!endProgram){
-		app.drawBackground();
-
 		ev.handle();
 
-		//printf("%s\n", SDL_GetError());
+		if(gameOver){
+			if(winner == LEFT)
+				app.drawLeftWin();
+			else
+				app.drawRightWin();
+		}
+		else{
+			app.drawBackground();
 
-		// Update player and check for bullet collision
-		player1.update();
-		player1.checkCollision(player2.getBullets());
-		player2.update();
-		player2.checkCollision(player1.getBullets());
+			// Update player and check for bullet collision
+			player1.update();
+			player2.update();
 
+			player1.checkCollision(player2.getBullets());
+			player2.checkCollision(player1.getBullets());
+		}
+
+		// Render to screen
 		SDL_RenderPresent(renderer);
 		SDL_Delay(20);
 	}

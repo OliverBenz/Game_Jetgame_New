@@ -25,6 +25,11 @@ void Player::shoot(DIRECTION dir){
 }
 
 void Player::update(){
+	if(this->health <= 0){
+		gameOver = true;
+		winner = this->side == LEFT ? RIGHT : LEFT;
+	}
+
 	this->move();
 	this->draw();
 

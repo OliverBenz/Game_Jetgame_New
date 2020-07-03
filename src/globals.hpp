@@ -3,6 +3,9 @@
 
 extern Player player1;
 extern Player player2;
+
 extern bool endProgram;
+extern bool gameOver;
+extern DIRECTION winner;
 
 extern SDL_Renderer *renderer;

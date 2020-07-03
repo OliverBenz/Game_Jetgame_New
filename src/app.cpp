@@ -34,11 +34,31 @@ bool App::init(){
 	this->background = SDL_LoadBMP(BM_BACKGROUND);
 	this->texture = SDL_CreateTextureFromSurface(renderer, background);
 	
+	// Create LeftWin Background
+	this->lwSurface = SDL_LoadBMP(BM_LEFTWIN);
+	this->lwTexture = SDL_CreateTextureFromSurface(renderer, lwSurface);
+
+	// Create RightWin Background
+	this->rwSurface = SDL_LoadBMP(BM_RIGHTWIN);
+	this->rwTexture = SDL_CreateTextureFromSurface(renderer, rwSurface);
+
 	return true;
 }
 
 void App::drawBackground(){
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
+}
+
+void App::drawLeftWin(){
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, lwTexture, NULL, NULL);
+}
+
+void App::drawRightWin(){
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, rwTexture, NULL, NULL);
 }
 
 void App::destroy(){
