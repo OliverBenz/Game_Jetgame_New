@@ -19,8 +19,8 @@ SDL_Rect r = {
 	.h = PLAYER_HEIGHT
 };
 
-Player player1(&l, BM_PLAYER1);
-Player player2(&r, BM_PLAYER2);
+Player player1(&l, LEFT, BM_PLAYER1);
+Player player2(&r, RIGHT, BM_PLAYER2);
 
 bool endProgram = false;
 SDL_Renderer* renderer;
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
 
 		ev.handle();
 
-		printf("%s\n", SDL_GetError());
+		//printf("%s\n", SDL_GetError());
 
 		// Update player and check for bullet collision
 		player1.update();

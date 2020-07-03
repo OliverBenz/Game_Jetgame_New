@@ -2,7 +2,8 @@
 #include "definitions.hpp"
 #include "globals.hpp"
 
-Player::Player(SDL_Rect *position, std::string bmloc) : Entity(position, bmloc, PLAYER_SPEED){
+Player::Player(SDL_Rect *position, DIRECTION side, std::string bmloc) : Entity(position, bmloc, PLAYER_SPEED){
+	this->side = side;
 	this->health = PLAYER_HEALTH;
 }
 
@@ -10,8 +11,8 @@ void Player::shoot(DIRECTION dir){
 	// Bullet can only move left or right
 	if(dir == LEFT || dir == RIGHT){
 		SDL_Rect *bPos = new SDL_Rect{
-			.x = (this->position->x + this->position->w),
-			.y = (this->position->y + (this->position->h / 2)),
+			.x = this->side == LEFT ? (this->position->x + this->position->w) : (this->position->x),
+			.y = (this->position->y + (this->position->h / 2) - BULLET_SIZE/2),
 			.w = BULLET_SIZE,
 			.h = BULLET_SIZE
 		};
@@ -28,13 +29,9 @@ void Player::update(){
 	this->draw();
 
 	if(this->bullets.size() != 0){
-		// Boundary on screen
-		int limit = this->bullets.front().getMovement(RIGHT) ? SCREEN_WIDTH-BULLET_SIZE : 0;
-		bool mvRight = this->bullets.front().getMovement(RIGHT);
-
 		for(auto it = std::begin(this->bullets); it != std::end(this->bullets); ++it){
 			// Check if bullet out of bounds
-			if(mvRight && it->position->x >= limit || !mvRight && it->position->x <= limit){
+			if((this->side == LEFT && it->position->x >= SCREEN_WIDTH - BULLET_SIZE) || (this->side == RIGHT && it->position->x <= 0)){
 				delete it->position;
 				this->bullets.erase(it);
 				--it;

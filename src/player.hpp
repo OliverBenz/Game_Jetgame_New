@@ -8,8 +8,11 @@ class Player : public Entity{
 	int health;
 	std::vector<Bullet> bullets;
 
+	// Player on left or right side of screen
+	enum DIRECTION side;
+
 public:
-	Player(SDL_Rect *position, std::string bmloc);
+	Player(SDL_Rect *position, DIRECTION id, std::string bmloc);
 
 	void update();
 	void destroy();
