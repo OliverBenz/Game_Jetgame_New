@@ -62,7 +62,7 @@ void Player::checkCollision(std::vector<Bullet>* bullets){
 		bullets->erase(it);
 		--it;
 
-		this->health -= BULLET_DAMAGE;
+		this->health -= it->damage;
 		continue;
 	}
 }

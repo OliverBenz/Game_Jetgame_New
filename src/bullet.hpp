@@ -3,8 +3,7 @@
 #include "entity.hpp"
 
 class Bullet : public Entity{
-	int damage;
-
 public:
+	int damage;
 	Bullet(SDL_Rect *position);
 };
