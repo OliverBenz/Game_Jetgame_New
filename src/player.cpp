@@ -43,8 +43,22 @@ void Player::update(){
 }
 
 void Player::checkCollision(std::vector<Bullet>* bullets){
-	for(auto& b: *bullets){
-		// If collision -> remove bullet
+	for(auto it = std::begin(*bullets); it != std::end(*bullets); ++it){
+		// Ignore Bullets not in x range
+		if(it->position->x + BULLET_SIZE < this->position->x || it->position->x > this->position->x + PLAYER_WIDTH)
+			continue;
+
+		// Ignore Bullets not in y range
+		if(it->position->y + BULLET_SIZE < this->position->y || it->position->y > this->position->y + PLAYER_HEIGHT)
+			continue;
+
+		// Remaining Bullets are in Player range
+		delete it->position;
+		bullets->erase(it);
+		--it;
+
+		this->health -= BULLET_DAMAGE;
+		continue;
 	}
 }
 
