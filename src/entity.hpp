@@ -28,5 +28,5 @@ public:
 	void draw();
 	void setMovement(DIRECTION dir, bool val);
 	bool getMovement(DIRECTION dir);
-	void move();
+	virtual void move();
 };

@@ -8,6 +8,8 @@ class Player : public Entity{
 	int health;
 	std::vector<Bullet> bullets;
 
+	int shootTimeout;
+
 	// Player on left or right side of screen
 	enum DIRECTION side;
 
@@ -21,4 +23,5 @@ public:
 
 	std::vector<Bullet>* getBullets();
 	void shoot(DIRECTION dir);
+	void move();
 };
