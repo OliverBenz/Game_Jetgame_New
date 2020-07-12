@@ -18,19 +18,19 @@ SDL_Rect r = {
 	.w = PLAYER_WIDTH,
 	.h = PLAYER_HEIGHT
 };
-
 Player player1(&l, LEFT, BM_PLAYER1);
 Player player2(&r, RIGHT, BM_PLAYER2);
 
-bool endProgram = false;
-DIRECTION winner = LEFT;
-
+// Init globals
 GAMESTATE gameState = GS_Main;
-
+DIRECTION winner = LEFT;
 SDL_Renderer* renderer;
 
+// Gamestate Functions
 void GameStateMain(App *app);
 void GameStateWinscreen(App *app);
+
+bool endProgram = false;
 
 int main(int argc, char *argv[]){
 	App app;
@@ -47,14 +47,10 @@ int main(int argc, char *argv[]){
 		ev.handle();
 
 		switch(gameState){
-			case GS_Titlescreen:
-				break;
-			case GS_Main:
-				GameStateMain(&app);
-				break;
-			case GS_Winscreen:
-				GameStateWinscreen(&app);
-				break;
+			case GS_Menu:		/* TODO: Create menu */		break;
+			case GS_Main:		GameStateMain(&app);		break;
+			case GS_Winscreen:	GameStateWinscreen(&app);	break;
+			case GS_End:		endProgram = true;			break;
 		}
 
 		// Render to screen
@@ -82,8 +78,9 @@ void GameStateMain(App *app){
 }
 
 void GameStateWinscreen(App *app){
-	if(winner == LEFT)
-		app->drawLeftWin();
-	else
-		app->drawRightWin();
+	switch(winner){
+		case LEFT:	app->drawLeftWin();	break;
+		case RIGHT:	app->drawRightWin();break;
+		default: break;
+	}
 }

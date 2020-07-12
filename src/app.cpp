@@ -67,7 +67,7 @@ void App::destroy(){
 	SDL_FreeSurface(background);
 
 	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(this->window);
+	SDL_DestroyWindow(window);
 
 	SDL_Quit();
 }
@@ -77,5 +77,5 @@ SDL_Renderer* App::getRenderer(){
 }
 
 SDL_Window* App::getWindow(){
-	return this->window;
+	return window;
 }

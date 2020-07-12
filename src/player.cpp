@@ -28,6 +28,7 @@ void Player::update(){
 	if(this->health <= 0){
 		gameState = GS_Winscreen;
 		winner = this->side == LEFT ? RIGHT : LEFT;
+		return;
 	}
 
 	this->move();
