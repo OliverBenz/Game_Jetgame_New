@@ -26,7 +26,7 @@ void Player::shoot(DIRECTION dir){
 
 void Player::update(){
 	if(this->health <= 0){
-		gameOver = true;
+		gameState = GS_Winscreen;
 		winner = this->side == LEFT ? RIGHT : LEFT;
 	}
 

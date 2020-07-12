@@ -23,10 +23,14 @@ Player player1(&l, LEFT, BM_PLAYER1);
 Player player2(&r, RIGHT, BM_PLAYER2);
 
 bool endProgram = false;
-bool gameOver = false;
 DIRECTION winner = LEFT;
 
+GAMESTATE gameState = GS_Main;
+
 SDL_Renderer* renderer;
+
+void GameStateMain(App *app);
+void GameStateWinscreen(App *app);
 
 int main(int argc, char *argv[]){
 	App app;
@@ -42,21 +46,15 @@ int main(int argc, char *argv[]){
 	while(!endProgram){
 		ev.handle();
 
-		if(gameOver){
-			if(winner == LEFT)
-				app.drawLeftWin();
-			else
-				app.drawRightWin();
-		}
-		else{
-			app.drawBackground();
-
-			// Update player and check for bullet collision
-			player1.update();
-			player2.update();
-
-			player1.checkCollision(player2.getBullets());
-			player2.checkCollision(player1.getBullets());
+		switch(gameState){
+			case GS_Titlescreen:
+				break;
+			case GS_Main:
+				GameStateMain(&app);
+				break;
+			case GS_Winscreen:
+				GameStateWinscreen(&app);
+				break;
 		}
 
 		// Render to screen
@@ -70,4 +68,22 @@ int main(int argc, char *argv[]){
 	app.destroy();
 
 	return 0;
+}
+
+void GameStateMain(App *app){
+	app->drawBackground();
+
+	// Update player and check for bullet collision
+	player1.update();
+	player2.update();
+
+	player1.checkCollision(player2.getBullets());
+	player2.checkCollision(player1.getBullets());
+}
+
+void GameStateWinscreen(App *app){
+	if(winner == LEFT)
+		app->drawLeftWin();
+	else
+		app->drawRightWin();
 }

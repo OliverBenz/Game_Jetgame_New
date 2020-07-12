@@ -1,3 +1,5 @@
+#pragma once
+
 // App
 #define SCREEN_HEIGHT 1080
 #define SCREEN_WIDTH  1920
