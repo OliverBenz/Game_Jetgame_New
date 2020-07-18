@@ -30,7 +30,7 @@ SDL_Renderer* renderer;
 void GameStateMenu(App *app);
 void GameStateMain(App *app);
 void GameStateWinscreen(App *app);
-void GameStateReset(App *app);
+void GameStateReset();
 
 bool endProgram = false;
 
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
 			case GS_Menu:		GameStateMenu(&app);		break;
 			case GS_Main:		GameStateMain(&app);		break;
 			case GS_Winscreen:	GameStateWinscreen(&app);	break;
-			case GS_Reset:		GameStateReset(&app);		break;
+			case GS_Reset:		GameStateReset();			break;
 			case GS_End:		endProgram = true;			break;
 		}
 
@@ -92,7 +92,7 @@ void GameStateWinscreen(App *app){
 	}
 }
 
-void GameStateReset(App *app){
+void GameStateReset(){
 	player1.reset();
 	player2.reset();
 
