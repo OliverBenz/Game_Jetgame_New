@@ -4,10 +4,11 @@
 #include "player.hpp"
 
 enum GAMESTATE{
-    GS_Menu,
-    GS_Main,
-    GS_Winscreen,
-    GS_End
+    GS_Menu,        // Menu screen
+    GS_Main,        // In game
+    GS_Winscreen,   // Player won
+    GS_Reset,       // Resetting game
+    GS_End          // Exit application
 };
 extern GAMESTATE gameState;
 

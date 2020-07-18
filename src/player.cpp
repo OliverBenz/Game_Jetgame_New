@@ -33,7 +33,8 @@ void Player::update(){
 		winner = this->side == LEFT ? RIGHT : LEFT;
 		return;
 	}
-	shootTimeout -= 5;
+	if(shootTimeout > 0)
+		shootTimeout -= 5;
 	this->move();
 	this->draw();
 
@@ -90,6 +91,28 @@ void Player::checkCollision(std::vector<Bullet>* bullets){
 
 std::vector<Bullet>* Player::getBullets(){
 	return &(this->bullets);
+}
+
+void Player::reset(){
+	// Delete all Bullets
+	for(Bullet b: this->bullets){
+		delete b.position;
+		b.destroy();
+	}
+
+	// Reset Player stats
+	this->health = PLAYER_HEALTH;
+	this->shootTimeout = 0;
+
+	// Reset Player position
+	if(this->side == LEFT){
+		this->position->x = 0;
+		this->position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
+	}
+	else{
+		this->position->x = SCREEN_WIDTH - PLAYER_WIDTH;
+		this->position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
+	}
 }
 
 void Player::destroy(){

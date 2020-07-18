@@ -17,8 +17,14 @@ void EventHandler::handle(){
 
 void keyboardHandle(const SDL_Scancode *sc, const bool val){
 	switch(*sc){
-		// TODO: Escape to enter menu
-		case SDL_SCANCODE_ESCAPE:	gameState = GS_End;			break;
+		case SDL_SCANCODE_ESCAPE:
+			gameState = GS_End;
+			break;
+
+		case SDL_SCANCODE_R:
+			if(gameState == GS_Winscreen)
+				gameState = GS_Reset;
+			break;
 
 		// Player 1 Controls
 		case SDL_SCANCODE_W:	player1.setMovement(UP, val);	break;

@@ -27,8 +27,10 @@ DIRECTION winner = LEFT;
 SDL_Renderer* renderer;
 
 // Gamestate Functions
+void GameStateMenu(App *app);
 void GameStateMain(App *app);
 void GameStateWinscreen(App *app);
+void GameStateReset(App *app);
 
 bool endProgram = false;
 
@@ -47,9 +49,10 @@ int main(int argc, char *argv[]){
 		ev.handle();
 
 		switch(gameState){
-			case GS_Menu:		/* TODO: Create menu */		break;
+			case GS_Menu:		GameStateMenu(&app);		break;
 			case GS_Main:		GameStateMain(&app);		break;
 			case GS_Winscreen:	GameStateWinscreen(&app);	break;
+			case GS_Reset:		GameStateReset(&app);		break;
 			case GS_End:		endProgram = true;			break;
 		}
 
@@ -64,6 +67,10 @@ int main(int argc, char *argv[]){
 	app.destroy();
 
 	return 0;
+}
+
+void GameStateMenu(App *app){
+	// TODO: Implement
 }
 
 void GameStateMain(App *app){
@@ -83,4 +90,11 @@ void GameStateWinscreen(App *app){
 		case RIGHT:	app->drawRightWin();break;
 		default: break;
 	}
+}
+
+void GameStateReset(App *app){
+	player1.reset();
+	player2.reset();
+
+	gameState = GS_Main;
 }
