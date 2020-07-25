@@ -8,22 +8,20 @@ Player::Player(SDL_Rect *position, DIRECTION side, std::string bmloc) : Entity(p
 }
 
 void Player::shoot(DIRECTION dir){
-	if(shootTimeout <= 0){
+	if(shootTimeout <= 0 && (dir == LEFT || dir == RIGHT)){
 		// Bullet can only move left or right
-		if(dir == LEFT || dir == RIGHT){
-			SDL_Rect *bPos = new SDL_Rect{
-				.x = this->side == LEFT ? (this->position->x + this->position->w) : (this->position->x),
-				.y = (this->position->y + (this->position->h / 2) - BULLET_SIZE/2),
-				.w = BULLET_SIZE,
-				.h = BULLET_SIZE
-			};
+		SDL_Rect *bPos = new SDL_Rect{
+			.x = this->side == LEFT ? (this->position->x + this->position->w) : (this->position->x),
+			.y = (this->position->y + (this->position->h / 2) - BULLET_SIZE/2),
+			.w = BULLET_SIZE,
+			.h = BULLET_SIZE
+		};
 
-			Bullet b(bPos);
-			b.create();
-			b.setMovement(dir, true);
-			this->bullets.push_back(b);
-			shootTimeout = SHOOT_TIMEOUT;
-		}
+		Bullet b(bPos);
+		b.create();
+		b.setMovement(dir, true);
+		this->bullets.push_back(b);
+		shootTimeout = SHOOT_TIMEOUT;
 	}
 }
 
@@ -42,12 +40,14 @@ void Player::update(){
 		for(auto it = std::begin(this->bullets); it != std::end(this->bullets); ++it){
 			// Check if bullet out of bounds
 			if((this->side == LEFT && it->position->x >= SCREEN_WIDTH - BULLET_SIZE) || (this->side == RIGHT && it->position->x <= 0)){
-				delete it->position;
+				it->destroy();
 				this->bullets.erase(it);
 				--it;
 				continue;
 			}
-			it->update();
+			else{
+				it->update();
+			}
 		}
 	}
 }
@@ -95,30 +95,31 @@ std::vector<Bullet>* Player::getBullets(){
 
 void Player::reset(){
 	// Delete all Bullets
-	for(Bullet b: this->bullets){
-		delete b.position;
+	for(Bullet b: this->bullets)
 		b.destroy();
-	}
 
 	// Reset Player stats
 	this->health = PLAYER_HEALTH;
 	this->shootTimeout = 0;
 
 	// Reset Player position
-	if(this->side == LEFT){
-		this->position->x = 0;
-		this->position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
-	}
-	else{
-		this->position->x = SCREEN_WIDTH - PLAYER_WIDTH;
-		this->position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
+	switch(this->side){
+		case LEFT:
+			this->position->x = 0;
+			this->position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
+			break;
+
+		case RIGHT:
+			this->position->x = SCREEN_WIDTH - PLAYER_WIDTH;
+			this->position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
+			break;
+		default:
+			fprintf(stderr, "Invalid player side definition");
 	}
 }
 
 void Player::destroy(){
-	for(Bullet b: this->bullets){
-		delete b.position;
+	for(Bullet b: this->bullets)
 		b.destroy();
-	}
 	Entity::destroy();
 }
