@@ -1,9 +1,9 @@
 #include <SDL2/SDL.h>
 
-#include "definitions.hpp"
-#include "app.hpp"
-#include "globals.hpp"
-#include "evHandler.hpp"
+#include "src/definitions.hpp"
+#include "src/app.hpp"
+#include "src/globals.hpp"
+#include "src/evHandler.hpp"
 
 // Startposition of Player r(right), l(left)
 SDL_Rect l = {
