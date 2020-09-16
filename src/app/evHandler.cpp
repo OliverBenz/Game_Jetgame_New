@@ -1,5 +1,5 @@
 #include "evHandler.hpp"
-#include "globals.hpp"
+#include "../globals.hpp"
 
 void keyboardHandle(const SDL_Scancode *sc, const bool val);
 

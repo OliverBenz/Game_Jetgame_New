@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include "globals.hpp"
+#include "../globals.hpp"
 
 class App{
 	int renderFlag, windowFlag;	

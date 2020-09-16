@@ -1,6 +1,6 @@
 #include "player.hpp"
-#include "definitions.hpp"
-#include "globals.hpp"
+#include "../definitions.hpp"
+#include "../globals.hpp"
 
 Player::Player(SDL_Rect *position, DIRECTION side, std::string bmloc) : Entity(position, bmloc, PLAYER_SPEED){
 	this->side = side;

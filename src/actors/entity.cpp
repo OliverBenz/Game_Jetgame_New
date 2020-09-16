@@ -1,6 +1,6 @@
 #include "entity.hpp"
-#include "definitions.hpp"
-#include "globals.hpp"
+#include "../definitions.hpp"
+#include "../globals.hpp"
 
 Entity::Entity(SDL_Rect *position, std::string bmloc, int speed){
 	this->position = position;

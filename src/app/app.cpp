@@ -1,6 +1,6 @@
 #include <error.h>
 #include "app.hpp"
-#include "definitions.hpp"
+#include "../definitions.hpp"
 
 App::App(){
 	renderFlag = SDL_RENDERER_ACCELERATED;

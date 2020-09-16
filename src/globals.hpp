@@ -1,7 +1,7 @@
 #pragma once 
 
 #include <SDL2/SDL.h>
-#include "player.hpp"
+#include "actors/player.hpp"
 
 enum GAMESTATE{
     GS_Menu,        // Menu screen
