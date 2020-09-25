@@ -49,11 +49,11 @@ int main(int argc, char *argv[]){
 		ev.handle();
 
 		switch(gameState){
-			case GS_Menu:		GameStateMenu(&app);		break;
-			case GS_Main:		GameStateMain(&app);		break;
-			case GS_Winscreen:	GameStateWinscreen(&app);	break;
-			case GS_Reset:		GameStateReset();			break;
-			case GS_End:		endProgram = true;			break;
+			case GS_Menu:      GameStateMenu(&app);      break;
+			case GS_Main:      GameStateMain(&app);      break;
+			case GS_Winscreen: GameStateWinscreen(&app); break;
+			case GS_Reset:     GameStateReset();         break;
+			case GS_End:       endProgram = true;        break;
 		}
 
 		// Render to screen
@@ -85,11 +85,10 @@ void GameStateMain(App *app){
 }
 
 void GameStateWinscreen(App *app){
-	switch(winner){
-		case LEFT:	app->drawLeftWin();	break;
-		case RIGHT:	app->drawRightWin();break;
-		default: break;
-	}
+	if (winner == LEFT)
+		app->drawLeftWin();
+	else
+		app->drawRightWin();
 }
 
 void GameStateReset(){
