@@ -88,7 +88,6 @@ void Player::checkCollision(std::vector<Bullet>* bullets){
 	}
 }
 
-
 std::vector<Bullet>* Player::getBullets(){
 	return &(this->bullets);
 }
@@ -97,6 +96,7 @@ void Player::reset(){
 	// Delete all Bullets
 	for(Bullet b: this->bullets)
 		b.destroy();
+	this->bullets.clear();
 
 	// Reset Player stats
 	this->health = PLAYER_HEALTH;
