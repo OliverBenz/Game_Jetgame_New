@@ -16,7 +16,7 @@ class Player : public Entity{
 public:
 	Player(SDL_Rect *position, DIRECTION id, std::string bmloc);
 
-	void update();
+	void update(Uint32 time);
 	void reset();
 	void destroy();
 
@@ -24,5 +24,5 @@ public:
 
 	std::vector<Bullet>* getBullets();
 	void shoot(DIRECTION dir);
-	void move();
+	void move(Uint32 time);
 };

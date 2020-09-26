@@ -33,6 +33,7 @@ void GameStateWinscreen(App *app);
 void GameStateReset();
 
 bool endProgram = false;
+Uint32 lastTicks = SDL_GetTicks();
 
 int main(int argc, char *argv[]){
 	App app;
@@ -56,6 +57,8 @@ int main(int argc, char *argv[]){
 			case GS_End:       endProgram = true;        break;
 		}
 
+		lastTicks = SDL_GetTicks();
+
 		// Render to screen
 		SDL_RenderPresent(renderer);
 		SDL_Delay(20);
@@ -74,11 +77,12 @@ void GameStateMenu(App *app){
 }
 
 void GameStateMain(App *app){
+	Uint32 gameTicks = SDL_GetTicks();
 	app->drawBackground();
 
 	// Update player and check for bullet collision
-	player1.update();
-	player2.update();
+	player1.update((gameTicks - lastTicks) / 12);
+	player2.update((gameTicks - lastTicks) / 12);
 
 	player1.checkCollision(player2.getBullets());
 	player2.checkCollision(player1.getBullets());

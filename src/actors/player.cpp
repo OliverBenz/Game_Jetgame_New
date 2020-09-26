@@ -25,7 +25,7 @@ void Player::shoot(DIRECTION dir){
 	}
 }
 
-void Player::update(){
+void Player::update(Uint32 time){
 	if(this->health <= 0){
 		gameState = GS_Winscreen;
 		winner = this->side == LEFT ? RIGHT : LEFT;
@@ -33,7 +33,7 @@ void Player::update(){
 	}
 	if(shootTimeout > 0)
 		shootTimeout -= 5;
-	this->move();
+	this->move(time);
 	this->draw();
 
 	if(this->bullets.size() != 0){
@@ -46,14 +46,14 @@ void Player::update(){
 				continue;
 			}
 			else{
-				it->update();
+				it->update(time);
 			}
 		}
 	}
 }
 
-void Player::move(){
-	Entity::move();
+void Player::move(Uint32 time){
+	Entity::move(time);
 	switch(this->side){
 		case LEFT:
 			if(this->position->x + PLAYER_WIDTH > SCREEN_WIDTH / 2)

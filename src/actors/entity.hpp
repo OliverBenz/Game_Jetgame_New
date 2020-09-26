@@ -24,9 +24,9 @@ public:
 	void create();
 	virtual void destroy();
 	
-	virtual void update();
+	virtual void update(Uint32 time);
 	void draw();
 	void setMovement(DIRECTION dir, bool val);
 	bool getMovement(DIRECTION dir);
-	virtual void move();
+	virtual void move(Uint32 time);
 };
