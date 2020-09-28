@@ -1,7 +1,8 @@
 # Controls
 
 ## General
-`R` Restart game
+`R` Restart game <br />
+`Escape` Exit game
 
 <br />
 
