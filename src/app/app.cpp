@@ -66,6 +66,14 @@ void App::destroy(){
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(background);
 
+	// Destroy Left Win Background
+	SDL_DestroyTexture(lwTexture);
+	SDL_FreeSurface(lwSurface);
+
+	// Destroy Right Win Background
+	SDL_DestroyTexture(rwTexture);
+	SDL_FreeSurface(rwSurface);
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 
