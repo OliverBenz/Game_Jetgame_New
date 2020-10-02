@@ -1,4 +1,4 @@
-#include <error.h>
+#include <iostream>
 #include "app.hpp"
 #include "../definitions.hpp"
 
@@ -12,13 +12,13 @@ App::App(){
 
 bool App::init(){
 	if(SDL_Init(SDL_INIT_VIDEO) < 0){
-		fprintf(stderr, "Could not initialize SDL: %s\n", SDL_GetError());
+		std::cerr << "Could not initialize SDL: %s\n" << SDL_GetError() << std::endl;
 		return false;
 	}
 	
 	this->window = SDL_CreateWindow("Main Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlag);
 	if(! this->window){
-		fprintf(stderr, "Could not open window: %s\n", SDL_GetError());
+		std::cerr << "Could not open window: %s\n" << SDL_GetError() << std::endl;
 		return false;
 	}
 
@@ -26,7 +26,7 @@ bool App::init(){
 
 	renderer = SDL_CreateRenderer(this->window, -1, renderFlag);
 	if(! renderer){
-		fprintf(stderr, "Could not create renderer: %s\n", SDL_GetError());
+		std::cerr << "Could not create renderer: %s\n" << SDL_GetError() << std::endl;
 		return false;
 	}
 
