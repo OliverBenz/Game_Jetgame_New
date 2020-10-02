@@ -17,8 +17,8 @@ Entity::Entity(SDL_Rect *position, std::string bmloc, int speed){
 }
 
 void Entity::create(){
-	this->surface = SDL_LoadBMP(this->bmloc.c_str());
-	this->texture = SDL_CreateTextureFromSurface(renderer, surface);
+	surface = SDL_LoadBMP(bmloc.c_str());
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
 }
 
 void Entity::destroy(){
@@ -37,35 +37,35 @@ void Entity::draw(){
 }
 
 void Entity::setMovement(DIRECTION dir, bool val){
-	this->movement[dir] = val;
+	movement[dir] = val;
 }
 
 bool Entity::getMovement(DIRECTION dir){
-	return this->movement[dir];
+	return movement[dir];
 }
 
 void Entity::move(Uint32 time){
-	if(this->movement[UP]){
-		if (! this->movement[DOWN]){
-			this->position->y -= speed * time;
-			if(this->position->y <= 0)
-				this->position->y = 0;
+	if(movement[UP]){
+		if (! movement[DOWN]){
+			position->y -= speed * time;
+			if(position->y <= 0)
+				position->y = 0;
 		}
 	}
-	else if(this->movement[DOWN]){
-		if(! (this->position->y >= SCREEN_HEIGHT - this->position->h))
-			this->position->y += speed * time;
+	else if(movement[DOWN]){
+		if(! (position->y >= SCREEN_HEIGHT - position->h))
+			position->y += speed * time;
 	}
 		
-	if(this->movement[LEFT]){
-		if(! this->movement[RIGHT]){
-			this->position->x -= speed * time;
-			if(this->position->x < 0)
-				this->position->x = 0;
+	if(movement[LEFT]){
+		if(! movement[RIGHT]){
+			position->x -= speed * time;
+			if(position->x < 0)
+				position->x = 0;
 		}
 	}
-	else if(this->movement[RIGHT]){
-		if(! (this->position->x >= SCREEN_WIDTH - this->position->w))
-			this->position->x += speed * time;
+	else if(movement[RIGHT]){
+		if(! (position->x >= SCREEN_WIDTH - position->w))
+			position->x += speed * time;
 	}
 }
