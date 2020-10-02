@@ -23,10 +23,7 @@ void Entity::create(){
 
 void Entity::destroy(){
 	SDL_DestroyTexture(texture);
-	texture = nullptr;
-
 	SDL_FreeSurface(surface);
-	surface = nullptr;
 }
 
 
