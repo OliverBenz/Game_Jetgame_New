@@ -27,7 +27,7 @@ void Player::shoot(const DIRECTION dir){
 
 void Player::update(const Uint32 time){
 	if(health <= 0){
-		gameState = GS_Winscreen;
+		gameState = GAMESTATE::GS_Winscreen;
 		winner = side == DIRECTION::LEFT ? DIRECTION::RIGHT : DIRECTION::LEFT;
 		return;
 	}

@@ -22,7 +22,7 @@ Player player1(&l, DIRECTION::LEFT, BM_PLAYER1);
 Player player2(&r, DIRECTION::RIGHT, BM_PLAYER2);
 
 // Init globals
-GAMESTATE gameState = GS_Main;
+GAMESTATE gameState = GAMESTATE::GS_Main;
 DIRECTION winner = DIRECTION::LEFT;
 SDL_Renderer* renderer = nullptr;
 
@@ -50,11 +50,11 @@ int main(int argc, char *argv[]){
 		ev.handle();
 
 		switch(gameState){
-			case GS_Menu:      GameStateMenu(app);      break;
-			case GS_Main:      GameStateMain(app);      break;
-			case GS_Winscreen: GameStateWinscreen(app); break;
-			case GS_Reset:     GameStateReset();         break;
-			case GS_End:       endProgram = true;        break;
+			case GAMESTATE::GS_Menu:      GameStateMenu(app);      break;
+			case GAMESTATE::GS_Main:      GameStateMain(app);      break;
+			case GAMESTATE::GS_Winscreen: GameStateWinscreen(app); break;
+			case GAMESTATE::GS_Reset:     GameStateReset();        break;
+			case GAMESTATE::GS_End:       endProgram = true;       break;
 		}
 
 		lastTicks = SDL_GetTicks();
@@ -99,5 +99,5 @@ void GameStateReset(){
 	player1.reset();
 	player2.reset();
 
-	gameState = GS_Main;
+	gameState = GAMESTATE::GS_Main;
 }
