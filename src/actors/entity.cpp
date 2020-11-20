@@ -10,10 +10,10 @@ Entity::Entity(SDL_Rect *position, std::string bmloc, int speed){
 
 	this->speed = speed;
 
-	this->movement[UP] = false;
-	this->movement[DOWN] = false;
-	this->movement[LEFT] = false;
-	this->movement[RIGHT] = false;
+	this->movement[DIRECTION::UP] = false;
+	this->movement[DIRECTION::DOWN] = false;
+	this->movement[DIRECTION::LEFT] = false;
+	this->movement[DIRECTION::RIGHT] = false;
 }
 
 void Entity::create(){
@@ -45,26 +45,26 @@ bool Entity::getMovement(DIRECTION dir){
 }
 
 void Entity::move(Uint32 time){
-	if(movement[UP]){
-		if (! movement[DOWN]){
+	if(movement[DIRECTION::UP]){
+		if (! movement[DIRECTION::DOWN]){
 			position->y -= speed * time;
 			if(position->y <= 0)
 				position->y = 0;
 		}
 	}
-	else if(movement[DOWN]){
+	else if(movement[DIRECTION::DOWN]){
 		if(! (position->y >= SCREEN_HEIGHT - position->h))
 			position->y += speed * time;
 	}
 		
-	if(movement[LEFT]){
-		if(! movement[RIGHT]){
+	if(movement[DIRECTION::LEFT]){
+		if(! movement[DIRECTION::RIGHT]){
 			position->x -= speed * time;
 			if(position->x < 0)
 				position->x = 0;
 		}
 	}
-	else if(movement[RIGHT]){
+	else if(movement[DIRECTION::RIGHT]){
 		if(! (position->x >= SCREEN_WIDTH - position->w))
 			position->x += speed * time;
 	}

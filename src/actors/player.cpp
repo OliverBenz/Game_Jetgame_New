@@ -8,10 +8,10 @@ Player::Player(SDL_Rect *position, DIRECTION side, std::string bmloc) : Entity(p
 }
 
 void Player::shoot(DIRECTION dir){
-	if(shootTimeout <= 0 && (dir == LEFT || dir == RIGHT)){
+	if(shootTimeout <= 0 && (dir == DIRECTION::LEFT || dir == DIRECTION::RIGHT)){
 		// Bullet can only move left or right
 		SDL_Rect *bPos = new SDL_Rect{
-			.x = side == LEFT ? (position->x + position->w) : (position->x),
+			.x = side == DIRECTION::LEFT ? (position->x + position->w) : (position->x),
 			.y = (position->y + (position->h / 2) - BULLET_SIZE/2),
 			.w = BULLET_SIZE,
 			.h = BULLET_SIZE
@@ -28,7 +28,7 @@ void Player::shoot(DIRECTION dir){
 void Player::update(Uint32 time){
 	if(health <= 0){
 		gameState = GS_Winscreen;
-		winner = side == LEFT ? RIGHT : LEFT;
+		winner = side == DIRECTION::LEFT ? DIRECTION::RIGHT : DIRECTION::LEFT;
 		return;
 	}
 
@@ -41,8 +41,8 @@ void Player::update(Uint32 time){
 	if(bullets.size() != 0){
 		for(auto it = std::begin(bullets); it != std::end(bullets); ++it){
 			// Check if bullet out of bounds
-			if((side == LEFT && it->position->x >= SCREEN_WIDTH - BULLET_SIZE) ||
-				(side == RIGHT && it->position->x <= 0))
+			if((side == DIRECTION::LEFT && it->position->x >= SCREEN_WIDTH - BULLET_SIZE) ||
+				(side == DIRECTION::RIGHT && it->position->x <= 0))
 			{
 				it->destroy();
 				bullets.erase(it);
@@ -59,12 +59,12 @@ void Player::update(Uint32 time){
 void Player::move(Uint32 time){
 	Entity::move(time);
 	switch(side){
-		case LEFT:
+		case DIRECTION::LEFT:
 			if(position->x + PLAYER_WIDTH > SCREEN_WIDTH / 2)
 				position->x = (SCREEN_WIDTH / 2 ) - PLAYER_WIDTH;
 			break;
 
-		case RIGHT:
+		case DIRECTION::RIGHT:
 			if(position->x < SCREEN_WIDTH / 2)
 				position->x = SCREEN_WIDTH / 2;
 			break;
@@ -108,15 +108,16 @@ void Player::reset(){
 
 	// Reset Player position
 	switch(side){
-		case LEFT:
+		case DIRECTION::LEFT:
 			position->x = 0;
 			position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
 			break;
 
-		case RIGHT:
+		case DIRECTION::RIGHT:
 			position->x = SCREEN_WIDTH - PLAYER_WIDTH;
 			position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
 			break;
+
 		default:
 			fprintf(stderr, "Invalid player side definition");
 	}

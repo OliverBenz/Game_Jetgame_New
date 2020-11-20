@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-enum DIRECTION { UP, DOWN, LEFT, RIGHT };
+enum class DIRECTION { UP, DOWN, LEFT, RIGHT };
 
 class Entity{
 	int speed;
