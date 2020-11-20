@@ -2,13 +2,7 @@
 #include "app.hpp"
 #include "../definitions.hpp"
 
-App::App(){
-	renderFlag = SDL_RENDERER_ACCELERATED;
-	windowFlag = 0;
-
-	renderer = nullptr;
-	window = nullptr;
-}
+App::App(){ }
 
 bool App::init(){
 	if(SDL_Init(SDL_INIT_VIDEO) < 0){

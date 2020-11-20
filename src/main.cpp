@@ -24,7 +24,7 @@ Player player2(&r, DIRECTION::RIGHT, BM_PLAYER2);
 // Init globals
 GAMESTATE gameState = GS_Main;
 DIRECTION winner = DIRECTION::LEFT;
-SDL_Renderer* renderer;
+SDL_Renderer* renderer = nullptr;
 
 // Gamestate Functions
 void GameStateMenu(App& app);

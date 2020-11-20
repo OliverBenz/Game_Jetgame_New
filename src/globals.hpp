@@ -17,4 +17,4 @@ extern Player player2;
 
 extern DIRECTION winner;
 
-extern SDL_Renderer *renderer;
+extern SDL_Renderer *renderer;  // Destroyed in app class
