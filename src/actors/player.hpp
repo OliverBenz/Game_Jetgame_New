@@ -11,18 +11,18 @@ class Player : public Entity{
 	int shootTimeout;
 
 	// Player on left or right side of screen
-	enum DIRECTION side;
+	DIRECTION side;
 
 public:
-	Player(SDL_Rect *position, DIRECTION id, std::string bmloc);
+	Player(SDL_Rect *position, const DIRECTION id, const std::string bmloc);
 
-	void update(Uint32 time);
+	void update(const Uint32 time);
 	void reset();
 	void destroy();
 
-	void checkCollision(std::vector<Bullet>* bullets);
+	void checkCollision(std::vector<Bullet>& bullets);
 
-	std::vector<Bullet>* getBullets();
-	void shoot(DIRECTION dir);
-	void move(Uint32 time);
+	std::vector<Bullet>& getBullets();
+	void shoot(const DIRECTION dir);
+	void move(const Uint32 time);
 };

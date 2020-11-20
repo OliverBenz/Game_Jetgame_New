@@ -27,7 +27,7 @@ void Entity::destroy(){
 }
 
 
-void Entity::update(Uint32 time){
+void Entity::update(const Uint32 time){
 	move(time);
 	draw();
 }
@@ -36,15 +36,15 @@ void Entity::draw(){
 	SDL_RenderCopy(renderer, texture, NULL, position);
 }
 
-void Entity::setMovement(DIRECTION dir, bool val){
+void Entity::setMovement(const DIRECTION dir, const bool val){
 	movement[dir] = val;
 }
 
-bool Entity::getMovement(DIRECTION dir){
+bool Entity::getMovement(const DIRECTION dir){
 	return movement[dir];
 }
 
-void Entity::move(Uint32 time){
+void Entity::move(const Uint32 time){
 	if(movement[DIRECTION::UP]){
 		if (! movement[DIRECTION::DOWN]){
 			position->y -= speed * time;

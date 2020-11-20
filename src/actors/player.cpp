@@ -2,12 +2,12 @@
 #include "../definitions.hpp"
 #include "../globals.hpp"
 
-Player::Player(SDL_Rect *position, DIRECTION side, std::string bmloc) : Entity(position, bmloc, PLAYER_SPEED){
+Player::Player(SDL_Rect *position, const DIRECTION side, const std::string bmloc) : Entity(position, bmloc, PLAYER_SPEED){
 	this->side = side;
 	this->health = PLAYER_HEALTH;
 }
 
-void Player::shoot(DIRECTION dir){
+void Player::shoot(const DIRECTION dir){
 	if(shootTimeout <= 0 && (dir == DIRECTION::LEFT || dir == DIRECTION::RIGHT)){
 		// Bullet can only move left or right
 		SDL_Rect *bPos = new SDL_Rect{
@@ -25,7 +25,7 @@ void Player::shoot(DIRECTION dir){
 	}
 }
 
-void Player::update(Uint32 time){
+void Player::update(const Uint32 time){
 	if(health <= 0){
 		gameState = GS_Winscreen;
 		winner = side == DIRECTION::LEFT ? DIRECTION::RIGHT : DIRECTION::LEFT;
@@ -56,7 +56,7 @@ void Player::update(Uint32 time){
 	}
 }
 
-void Player::move(Uint32 time){
+void Player::move(const Uint32 time){
 	Entity::move(time);
 	switch(side){
 		case DIRECTION::LEFT:
@@ -71,8 +71,8 @@ void Player::move(Uint32 time){
 	}
 }
 
-void Player::checkCollision(std::vector<Bullet>* bullets){
-	for(auto it = std::begin(*bullets); it != std::end(*bullets); ++it){
+void Player::checkCollision(std::vector<Bullet>& bullets){
+	for(auto it = std::begin(bullets); it != std::end(bullets); ++it){
 		// Ignore Bullets not in x range
 		if(it->position->x + BULLET_SIZE < this->position->x || it->position->x > this->position->x + PLAYER_WIDTH)
 			continue;
@@ -85,15 +85,15 @@ void Player::checkCollision(std::vector<Bullet>* bullets){
 		health -= it->damage;
 
 		delete it->position;
-		bullets->erase(it);
+		bullets.erase(it);
 		--it;
 
 		continue;
 	}
 }
 
-std::vector<Bullet>* Player::getBullets(){
-	return &bullets;
+std::vector<Bullet>& Player::getBullets(){
+	return bullets;
 }
 
 void Player::reset(){
