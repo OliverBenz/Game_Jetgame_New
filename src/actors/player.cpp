@@ -2,16 +2,16 @@
 #include "../definitions.hpp"
 #include "../globals.hpp"
 
-Player::Player(SDL_Rect *position, DIRECTION side, std::string bmloc) : Entity(position, bmloc, PLAYER_SPEED){
+Player::Player(SDL_Rect *position, const DIRECTION side, const std::string bmloc) : Entity(position, bmloc, PLAYER_SPEED){
 	this->side = side;
 	this->health = PLAYER_HEALTH;
 }
 
-void Player::shoot(DIRECTION dir){
-	if(shootTimeout <= 0 && (dir == LEFT || dir == RIGHT)){
+void Player::shoot(const DIRECTION dir){
+	if(shootTimeout <= 0 && (dir == DIRECTION::LEFT || dir == DIRECTION::RIGHT)){
 		// Bullet can only move left or right
 		SDL_Rect *bPos = new SDL_Rect{
-			.x = side == LEFT ? (position->x + position->w) : (position->x),
+			.x = side == DIRECTION::LEFT ? (position->x + position->w) : (position->x),
 			.y = (position->y + (position->h / 2) - BULLET_SIZE/2),
 			.w = BULLET_SIZE,
 			.h = BULLET_SIZE
@@ -25,10 +25,10 @@ void Player::shoot(DIRECTION dir){
 	}
 }
 
-void Player::update(Uint32 time){
+void Player::update(const Uint32 time){
 	if(health <= 0){
-		gameState = GS_Winscreen;
-		winner = side == LEFT ? RIGHT : LEFT;
+		gameState = GAMESTATE::GS_Winscreen;
+		winner = side == DIRECTION::LEFT ? DIRECTION::RIGHT : DIRECTION::LEFT;
 		return;
 	}
 
@@ -41,8 +41,8 @@ void Player::update(Uint32 time){
 	if(bullets.size() != 0){
 		for(auto it = std::begin(bullets); it != std::end(bullets); ++it){
 			// Check if bullet out of bounds
-			if((side == LEFT && it->position->x >= SCREEN_WIDTH - BULLET_SIZE) ||
-				(side == RIGHT && it->position->x <= 0))
+			if((side == DIRECTION::LEFT && it->position->x >= SCREEN_WIDTH - BULLET_SIZE) ||
+				(side == DIRECTION::RIGHT && it->position->x <= 0))
 			{
 				it->destroy();
 				bullets.erase(it);
@@ -56,23 +56,23 @@ void Player::update(Uint32 time){
 	}
 }
 
-void Player::move(Uint32 time){
+void Player::move(const Uint32 time){
 	Entity::move(time);
 	switch(side){
-		case LEFT:
+		case DIRECTION::LEFT:
 			if(position->x + PLAYER_WIDTH > SCREEN_WIDTH / 2)
 				position->x = (SCREEN_WIDTH / 2 ) - PLAYER_WIDTH;
 			break;
 
-		case RIGHT:
+		case DIRECTION::RIGHT:
 			if(position->x < SCREEN_WIDTH / 2)
 				position->x = SCREEN_WIDTH / 2;
 			break;
 	}
 }
 
-void Player::checkCollision(std::vector<Bullet>* bullets){
-	for(auto it = std::begin(*bullets); it != std::end(*bullets); ++it){
+void Player::checkCollision(std::vector<Bullet>& bullets){
+	for(auto it = std::begin(bullets); it != std::end(bullets); ++it){
 		// Ignore Bullets not in x range
 		if(it->position->x + BULLET_SIZE < this->position->x || it->position->x > this->position->x + PLAYER_WIDTH)
 			continue;
@@ -85,15 +85,15 @@ void Player::checkCollision(std::vector<Bullet>* bullets){
 		health -= it->damage;
 
 		delete it->position;
-		bullets->erase(it);
+		bullets.erase(it);
 		--it;
 
 		continue;
 	}
 }
 
-std::vector<Bullet>* Player::getBullets(){
-	return &bullets;
+std::vector<Bullet>& Player::getBullets(){
+	return bullets;
 }
 
 void Player::reset(){
@@ -108,15 +108,16 @@ void Player::reset(){
 
 	// Reset Player position
 	switch(side){
-		case LEFT:
+		case DIRECTION::LEFT:
 			position->x = 0;
 			position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
 			break;
 
-		case RIGHT:
+		case DIRECTION::RIGHT:
 			position->x = SCREEN_WIDTH - PLAYER_WIDTH;
 			position->y = SCREEN_HEIGHT / 2 - PLAYER_HEIGHT / 2;
 			break;
+
 		default:
 			fprintf(stderr, "Invalid player side definition");
 	}

@@ -4,7 +4,11 @@
 #include "../globals.hpp"
 
 class App{
-	int renderFlag, windowFlag;	
+	const int renderFlag = SDL_RENDERER_ACCELERATED;
+	const int windowFlag = 0;
+
+	//SDL_Renderer* renderer = nullptr;
+	SDL_Window *window = nullptr;
 
 	// Background Bitmap
 	SDL_Surface *background; 
@@ -17,8 +21,6 @@ class App{
 	// RightWin Bitmap
 	SDL_Surface *rwSurface;
 	SDL_Texture *rwTexture;	
-
-	SDL_Window *window;
 
 public:
 	// Initialize SDL

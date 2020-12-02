@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-enum DIRECTION { UP, DOWN, LEFT, RIGHT };
+enum class DIRECTION { UP, DOWN, LEFT, RIGHT };
 
 class Entity{
 	int speed;
@@ -24,9 +24,9 @@ public:
 	void create();
 	virtual void destroy();
 	
-	virtual void update(Uint32 time);
+	virtual void update(const Uint32 time);
 	void draw();
-	void setMovement(DIRECTION dir, bool val);
-	bool getMovement(DIRECTION dir);
-	virtual void move(Uint32 time);
+	void setMovement(const DIRECTION dir, const bool val);
+	bool getMovement(const DIRECTION dir);
+	virtual void move(const Uint32 time);
 };

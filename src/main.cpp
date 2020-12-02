@@ -18,18 +18,18 @@ SDL_Rect r = {
 	.w = PLAYER_WIDTH,
 	.h = PLAYER_HEIGHT
 };
-Player player1(&l, LEFT, BM_PLAYER1);
-Player player2(&r, RIGHT, BM_PLAYER2);
+Player player1(&l, DIRECTION::LEFT, BM_PLAYER1);
+Player player2(&r, DIRECTION::RIGHT, BM_PLAYER2);
 
 // Init globals
-GAMESTATE gameState = GS_Main;
-DIRECTION winner = LEFT;
-SDL_Renderer* renderer;
+GAMESTATE gameState = GAMESTATE::GS_Main;
+DIRECTION winner = DIRECTION::LEFT;
+SDL_Renderer* renderer = nullptr;
 
 // Gamestate Functions
-void GameStateMenu(App *app);
-void GameStateMain(App *app);
-void GameStateWinscreen(App *app);
+void GameStateMenu(App& app);
+void GameStateMain(App& app);
+void GameStateWinscreen(App& app);
 void GameStateReset();
 
 bool endProgram = false;
@@ -50,11 +50,11 @@ int main(int argc, char *argv[]){
 		ev.handle();
 
 		switch(gameState){
-			case GS_Menu:      GameStateMenu(&app);      break;
-			case GS_Main:      GameStateMain(&app);      break;
-			case GS_Winscreen: GameStateWinscreen(&app); break;
-			case GS_Reset:     GameStateReset();         break;
-			case GS_End:       endProgram = true;        break;
+			case GAMESTATE::GS_Menu:      GameStateMenu(app);      break;
+			case GAMESTATE::GS_Main:      GameStateMain(app);      break;
+			case GAMESTATE::GS_Winscreen: GameStateWinscreen(app); break;
+			case GAMESTATE::GS_Reset:     GameStateReset();        break;
+			case GAMESTATE::GS_End:       endProgram = true;       break;
 		}
 
 		lastTicks = SDL_GetTicks();
@@ -72,13 +72,13 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
-void GameStateMenu(App *app){
+void GameStateMenu(App& app){
 	// TODO: Implement
 }
 
-void GameStateMain(App *app){
+void GameStateMain(App& app){
 	Uint32 gameTicks = SDL_GetTicks();
-	app->drawBackground();
+	app.drawBackground();
 
 	// Update player and check for bullet collision
 	player1.update((gameTicks - lastTicks) / 12);
@@ -88,16 +88,16 @@ void GameStateMain(App *app){
 	player2.checkCollision(player1.getBullets());
 }
 
-void GameStateWinscreen(App *app){
-	if (winner == LEFT)
-		app->drawLeftWin();
+void GameStateWinscreen(App& app){
+	if (winner == DIRECTION::LEFT)
+		app.drawLeftWin();
 	else
-		app->drawRightWin();
+		app.drawRightWin();
 }
 
 void GameStateReset(){
 	player1.reset();
 	player2.reset();
 
-	gameState = GS_Main;
+	gameState = GAMESTATE::GS_Main;
 }
