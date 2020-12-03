@@ -42,7 +42,7 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
 
     - name: Install Dependencies
-      run: sudo apt install libsdl2-dev
+      run: sudo apt update; sudo apt install libsdl2-dev
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
