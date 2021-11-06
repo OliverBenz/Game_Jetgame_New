@@ -4,12 +4,12 @@
 #include <string>
 #include <map>
 
-enum class DIRECTION { UP, DOWN, LEFT, RIGHT };
+#include "../app/Direction.hpp"
 
 class Entity{
 	int speed;
 	
-	std::map<DIRECTION, bool> movement;
+	std::map<Direction, bool> movement;
 
 	// Bitmap Path 
 	std::string bmloc;	
@@ -18,15 +18,15 @@ class Entity{
 	SDL_Texture *texture;
 
 public:
-	SDL_Rect *position;
-	Entity(SDL_Rect *position, std::string bmloc, const int speed);
+	SDL_Rect position;
+	Entity(SDL_Rect position, std::string bmloc, int speed);
 
-	void create();
+	void create(SDL_Renderer* renderer);
 	virtual void destroy();
 	
-	virtual void update(const Uint32 time);
-	void draw();
-	void setMovement(const DIRECTION dir, const bool val);
-	bool getMovement(const DIRECTION dir);
-	virtual void move(const Uint32 time);
+	virtual void update(Uint32 time, SDL_Renderer* renderer);
+	void draw(SDL_Renderer* renderer);
+	void setMovement(Direction dir, bool val);
+	bool getMovement(Direction dir);
+	virtual void move(Uint32 time);
 };

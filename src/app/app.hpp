@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include "../globals.hpp"
 
 class App{
 	const int renderFlag = SDL_RENDERER_ACCELERATED;
@@ -9,6 +8,7 @@ class App{
 
 	//SDL_Renderer* renderer = nullptr;
 	SDL_Window *window = nullptr;
+	SDL_Renderer* renderer = nullptr;
 
 	// Background Bitmap
 	SDL_Surface *background; 

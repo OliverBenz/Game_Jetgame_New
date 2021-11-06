@@ -5,6 +5,6 @@
 class Bullet : public Entity{
 public:
 	int damage;
-	Bullet(SDL_Rect *position);
+	Bullet(SDL_Rect position);
 	void destroy();
 };
